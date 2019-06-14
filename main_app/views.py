@@ -18,11 +18,15 @@ def jobs_index(request):
 
 class JobCreate(CreateView):
     model = Job
-    fields = ['company', 'position']
+    fields = ['company', 'company_address', 'position', 'types', 'notes']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+def jobs_detail(request, job_id):
+    job = Job.objects.get(id=job_id)
+    return render(request, 'jobs/detail.html', {'job': job})
 
 def signup(request):
     error_message = ''

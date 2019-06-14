@@ -26,5 +26,5 @@ class Job(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return ('/jobs')
+        return reverse('jobs_detail', kwargs={'job_id': self.id})
 
