@@ -19,4 +19,4 @@
 ## Future Goals
 
 Hi Brandon youre good at baseball
-Thanks im doing changes
+Thanks.  You were a great sub last night
