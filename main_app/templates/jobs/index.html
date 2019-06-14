@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for job in jobs %}
+<h3>{{ job.company }}</h3>
+<h6>{{ job.position }}</h6>
+<h6>{{ job.created_on }}</h6>
+{% endfor %}
+
+{% endblock %}
