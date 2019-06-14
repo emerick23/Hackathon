@@ -24,6 +24,18 @@ class JobCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+class JobUpdate(UpdateView):
+    model = Job
+    fields = ['company', 'company_address', 'position', 'types', 'notes']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+        
+class JobDelete(DeleteView):
+    model = Job
+    success_url = '/jobs'
+
 def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)
     return render(request, 'jobs/detail.html', {'job': job})
