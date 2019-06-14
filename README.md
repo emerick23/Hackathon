@@ -17,7 +17,3 @@
 #### - CSS
 
 ## Future Goals
-
-Hi Brandon youre good at baseball
-Thanks.  You were a great sub last night
-1234
