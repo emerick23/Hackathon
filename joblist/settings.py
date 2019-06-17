@@ -25,7 +25,7 @@ SECRET_KEY = 'exk9+4pm8p2l-6@=6dpy#w0o8kxk4esjewlqi+y_@yl1g0r^ti'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [hidden-sands-65631.herokuapp.com/]
+ALLOWED_HOSTS = []
 
 
 # Application definition
