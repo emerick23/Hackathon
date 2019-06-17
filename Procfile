@@ -1,1 +1,1 @@
-web: gunicorn Hackathon.wsgi
+web: gunicorn joblist.wsgi
