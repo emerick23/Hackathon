@@ -10,24 +10,52 @@
     <title>Job Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'jobs_create' %}">Create Job</a></li>
-                <li><a href="{% url 'jobs_index' %}">Jobs</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'login' %}">Log In</a></li>
-                {% endif %}
-            </ul>
+        <nav style="background-color: #C6C6C6">
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="/" class="left brand-logo" style="color: black">&nbsp;&nbsp;joblist</a></li>
+                </ul>
+                <ul class="right">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'jobs_create' %}">Create Job</a></li>
+                    <li><a href="{% url 'jobs_index' %}">Jobs</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}"><a class="waves-effect waves-light btn modal-trigger"
+                                href="#modal1"><i class="material-icons"
+                                    style="font-size: 30px; color: black">person</i></a></a></li>
+
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                                <h1 style="color: black">Log In</h1>
+                                <h4 style="color: black">Become a part of our community!</h4>
+                                
+                                <form method="post" action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <input type="submit" class="btn" value="log in">
+                                    <input type="hidden" name="next" value="{{ next }}"><br>
+                                    <a href="{% url 'signup' %}" style="color: black">Sign Up</a> 
+                                  </form>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                </ul>
+            </div>
         </nav>
+
+        <script>  document.addEventListener('DOMContentLoaded', function () {
+                var elems = document.querySelectorAll('.modal');
+                var instances = M.Modal.init(elems);
+            });</script>
+
     </header>
     <main>
         {% block content %}
