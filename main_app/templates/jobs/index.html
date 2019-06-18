@@ -9,7 +9,10 @@
         <div class="card-content">
             <span class="card-title">Company: {{ job.company }}</span>
             <p>Position: {{ job.position }}</p>
-            <p>Created: {{ job.created_on }}</p>
+            <p>Updated on {{ job.date_updated }}</p>
+            {% if job.prioritized == true %}
+            <p>TRUE</p>
+            {% endif %}
         </div>
     </div>
   </a>
