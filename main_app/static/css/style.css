@@ -19,4 +19,54 @@ main {
     flex-direction: column;
     /* align-items: center; */
     overflow-y: scroll;
+    background-color: #C6C6C6;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0px, 0px, 0px, 0px;
+    margin: 0px, 0px, 0px, 0px;
+}
+
+.btn {
+    background-color: #C6C6C6;
+    color: black;
+}
+
+.login {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login>h1 {
+    margin: -.7%;
+}
+
+.signOnLog {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: -2%;
+}
+
+.login>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#id_username, #id_password {
+    height: 40px;
+    width: 250%;
+    border: 2px solid #C6C6C6;
+    
+}
+
+.login>input, label {
+    display: block;
 }
