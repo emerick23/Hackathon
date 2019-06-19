@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Job List</h1>
-
+<div class="row">
+  <div class="col s3" style="background-color: #c6c6c6">
+    <h5>APPLY</h5>
 {% for job in jobs %}
   <a href="{% url 'jobs_detail' job.id %}">
     <div class="card">
@@ -15,5 +16,63 @@
     </div>
   </a>
 {% endfor %}
+</div>
+<div class="col s3" style="background-color: #c6c6c6">
+  <h5>INTERVIEW</h5>
+  {% for job in jobs %}
+  <a href="{% url 'jobs_detail' job.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Company: {{ job.company }}</span>
+            <p>Position: {{ job.position }}</p>
+            <p>Updated on {{ job.date_updated }}</p>
+            {% if job.prioritized == true %}
+            <p>TRUE</p>
+            {% endif %}
+        </div>
+    </div>
+  </a>
+{% endfor %}
+</div>
+
+
+<div class="col s3" style="background-color: #c6c6c6">
+  <h5>FOLLOW UP</h5>
+  {% for job in jobs %}
+  <a href="{% url 'jobs_detail' job.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Company: {{ job.company }}</span>
+            <p>Position: {{ job.position }}</p>
+            <p>Updated on {{ job.date_updated }}</p>
+            {% if job.prioritized == true %}
+            <p>TRUE</p>
+            {% endif %}
+        </div>
+    </div>
+  </a>
+{% endfor %}
+</div>
+
+
+<div class="col s3" style="background-color: #c6c6c6">
+  <h5>OUTCOMES</h5>
+  {% for job in jobs %}
+  <a href="{% url 'jobs_detail' job.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Company: {{ job.company }}</span>
+            <p>Position: {{ job.position }}</p>
+            <p>Updated on {{ job.date_updated }}</p>
+            {% if job.prioritized == true %}
+            <p>TRUE</p>
+            {% endif %}
+        </div>
+    </div>
+  </a>
+{% endfor %}
+</div>
+
+</div>
 
 {% endblock %}

@@ -1,15 +1,26 @@
-{% extends 'base.html' %}
-{% block content %}
-
-<h1>Log In</h1>
-<h4>Become a Part of Our Community!</h4>
-
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="btn" value="log in">
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn" style="background-color: #C6C6C6"><a href="{% url 'signup' %}" style="color: black">Sign Up</a></button>
-  </form>
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <title>joblist</title>
+</head>
+<body class="login">
+    <h1>Log In</h1>
+    <h4>Become a Part of Our Community!</h4>
+    
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <input type="submit" class="btn" value="LOG IN">
+        <input type="hidden" name="next" value="{{ next }}"><br>
+      </form>
+      <div class="signOnLog">
+        <h6>Not a member?</h6>
+        <a href="{% url 'signup' %}" style="color: black"><h6>SIGN UP</h6></a>
+      </div>
+</body>
+</html>
