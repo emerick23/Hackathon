@@ -4,18 +4,18 @@
 <h1>Job List</h1>
 
 {% for job in jobs %}
+{% if job.stage == 'A' %}
   <a href="{% url 'jobs_detail' job.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">Company: {{ job.company }}</span>
             <p>Position: {{ job.position }}</p>
             <p>Updated on {{ job.date_updated }}</p>
-            {% if job.prioritized == true %}
-            <p>TRUE</p>
-            {% endif %}
+            <p>{{ job.stage }}</p>
         </div>
     </div>
   </a>
+  {% endif %}
 {% endfor %}
 
 {% endblock %}

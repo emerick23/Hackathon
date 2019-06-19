@@ -8,6 +8,7 @@
                 <p>Address: {{ job.company_address }}</p>
                 <p>Position: {{ job.position }}</p>
                 <p>Type: {{ job.get_types_display }}</p>
+                <p>{{ job.stage }}</p>
                 <h6>Contacts: </h6>
                 {% for contact in job.contact_set.all %}
                 <p>{{ contact.name }}</p>
@@ -28,6 +29,13 @@
                 </form>
                 {% endfor %}
             </div>
+            <div class="input-field">
+                <form action="{% url 'stage_update' job.id %}" method="post">
+                    {% csrf_token %}
+                    {{ stage_form.as_p }}
+                    <input type="submit" class="btn" value="Update Stage">
+                </form>
+            </div>
             <div class="card-action">
                 <a href="{% url 'jobs_update' job.id %}">Edit</a>
                 <a href="{% url 'jobs_delete' job.id %}">Delete</a>
@@ -35,4 +43,8 @@
         </div>
     </div>
 </div>
+<script>
+    var select2El = document.getElementById('id_stage');
+    M.FormSelect.init(select2El);
+</script>
 {% endblock %}

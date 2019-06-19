@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Job, Outcome
-from .forms import OutcomeForm
+from .forms import OutcomeForm, StageForm
 # Create your views here.
 
 def home(request):
@@ -39,7 +39,15 @@ class JobDelete(DeleteView):
 def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)
     outcome_form = OutcomeForm()
-    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form})
+    stage_form = StageForm()
+    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form})
+
+def stage_update(request, job_id):
+    job = Job.objects.get(id=job_id)
+    print(request.POST['stage'])
+    job.stage = request.POST['stage']
+    job.save()
+    return redirect('jobs_detail', job_id=job_id)
 
 def add_outcome(request, job_id):
     form = OutcomeForm(request.POST)
