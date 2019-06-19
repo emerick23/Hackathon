@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Job, Outcome
+from .models import Job, Outcome, Contact
 from .forms import OutcomeForm, StageForm, PrioritizeForm
 # Create your views here.
 
@@ -35,6 +35,14 @@ class JobUpdate(UpdateView):
 class JobDelete(DeleteView):
     model = Job
     success_url = '/jobs'
+
+class ContactCreate(CreateView):
+    model = Contact
+    fields = ['name', 'company', 'title', 'email']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)

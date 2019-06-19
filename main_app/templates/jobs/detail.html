@@ -47,6 +47,7 @@
                     {% endfor %}
                 </form>
             </div>
+            <a href="{% url 'contacts_create' %}" class="btn">Add Contact</a>
             <div class="card-action">
                 <a href="{% url 'jobs_update' job.id %}">Edit</a>
                 <a href="{% url 'jobs_delete' job.id %}">Delete</a>
