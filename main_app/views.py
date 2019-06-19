@@ -34,22 +34,29 @@ class JobUpdate(UpdateView):
         
 class JobDelete(DeleteView):
     model = Job
-    success_url = '/jobs'
 
 class ContactCreate(CreateView):
     model = Contact
     fields = ['name', 'company', 'title', 'email']
 
     def form_valid(self, form):
+        job = Job.objects.get(id=self.kwargs['job_id'])
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        form.instance.job = job
+        form.save()
+        return redirect('jobs_detail', job_id=self.kwargs['job_id'])
+
+class ContactDelete(DeleteView):
+    model = Contact
+    success_url = '/jobs'
 
 def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)
+    contact = job.contact_set.first()
     outcome_form = OutcomeForm()
     stage_form = StageForm()
     prioritize_form = PrioritizeForm()
-    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form, 'prioritize_form': prioritize_form})
+    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form, 'prioritize_form': prioritize_form, 'contact': contact})
 
 def job_prioritize(request, job_id):
     job = Job.objects.get(id=job_id)

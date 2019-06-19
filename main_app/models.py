@@ -50,10 +50,7 @@ class Job(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('jobs_detail', kwargs={'pk': self.id})
-
-    def prioritize(self):
-        print('hello')
+        return reverse('jobs_detail', kwargs={'job_id': self.id})
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
@@ -61,6 +58,9 @@ class Contact(models.Model):
     title = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('jobs_detail', kwargs={'job_id': self.id})
 
 class Outcome(models.Model):
     note = models.TextField(max_length=250)
