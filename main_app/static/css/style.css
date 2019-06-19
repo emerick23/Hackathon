@@ -70,3 +70,7 @@ main {
 .login>input, label {
     display: block;
 }
+
+.s3 {
+    min-width: 250px;
+}
