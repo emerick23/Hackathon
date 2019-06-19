@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Job, Outcome
+from .models import Job, Outcome, Contact
 from .forms import OutcomeForm, StageForm, PrioritizeForm
 # Create your views here.
 
@@ -34,14 +34,29 @@ class JobUpdate(UpdateView):
         
 class JobDelete(DeleteView):
     model = Job
+
+class ContactCreate(CreateView):
+    model = Contact
+    fields = ['name', 'company', 'title', 'email']
+
+    def form_valid(self, form):
+        job = Job.objects.get(id=self.kwargs['job_id'])
+        form.instance.user = self.request.user
+        form.instance.job = job
+        form.save()
+        return redirect('jobs_detail', job_id=self.kwargs['job_id'])
+
+class ContactDelete(DeleteView):
+    model = Contact
     success_url = '/jobs'
 
 def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)
+    contact = job.contact_set.first()
     outcome_form = OutcomeForm()
     stage_form = StageForm()
     prioritize_form = PrioritizeForm()
-    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form, 'prioritize_form': prioritize_form})
+    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form, 'prioritize_form': prioritize_form, 'contact': contact})
 
 def job_prioritize(request, job_id):
     job = Job.objects.get(id=job_id)

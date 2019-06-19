@@ -36,17 +36,18 @@
                 </form>
             </div>
             <div>
-                <p>{{ job.prioritized }}</p>
-            </div>
-            <div>
                 <form action="{% url 'job_prioritize' job.id %}" method="post">
                     {%csrf_token %}
                     {% for field in prioritize_form %}
-                    <input type="hidden" name="lit" value="-1">
                     <input type="submit" class="btn" value="Prioritize">
                     {% endfor %}
                 </form>
             </div>
+            {% if job.contact_set.first %}
+            <a href="{% url 'contact_delete' job.id contact.id %}" class="btn">Delete Contact</a>
+            {% else %}
+            <a href="{% url 'contact_create' job.id %}" class="btn">Add Contact</a>
+            {% endif %}
             <div class="card-action">
                 <a href="{% url 'jobs_update' job.id %}">Edit</a>
                 <a href="{% url 'jobs_delete' job.id %}">Delete</a>
