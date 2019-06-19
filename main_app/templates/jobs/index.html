@@ -4,7 +4,6 @@
 <h1>Job List</h1>
 
 {% for job in jobs %}
-{% if job.stage == 'A' %}
   <a href="{% url 'jobs_detail' job.id %}">
     <div class="card">
         <div class="card-content">
@@ -15,7 +14,6 @@
         </div>
     </div>
   </a>
-  {% endif %}
 {% endfor %}
 
 {% endblock %}
