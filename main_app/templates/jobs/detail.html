@@ -35,4 +35,17 @@
         </div>
     </div>
 </div>
+<div>
+    <form action="{% url 'add_track' job.id %}" method="post">
+    {% csrf_token %}
+    {% for field in track_form %}
+    <label>
+        <input type="checkbox"  value="true">
+        <span>{{ field.name }}</span>
+        <span>{{ field.value }}</span>
+    </label>
+    {% endfor %}
+    <input type="submit" class="btn" value="Save Progress">
+    </form>
+</div>
 {% endblock %}

@@ -10,6 +10,7 @@ urlpatterns = [
     path('jobs/<int:pk>/delete', views.JobDelete.as_view(), name='jobs_delete'),
     path('jobs/<int:job_id>/add_outcome/', views.add_outcome, name='add_outcome'),
     path('jobs/<int:job_id>/remove_outcome/<int:outcome_id>', views.remove_outcome, name='remove_outcome'),
+    path('jobs/<int:job_id>/add_track/', views.add_track, name='add_track'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
 ]
