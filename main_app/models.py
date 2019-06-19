@@ -62,9 +62,6 @@ class Contact(models.Model):
     email = models.EmailField(max_length=254)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
-    def get_absolute_url(self):
-        return reverse('jobs_detail', kwargs={'job_id': self.id})
-
 class Outcome(models.Model):
     note = models.TextField(max_length=250)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
