@@ -11,6 +11,9 @@
             <p>Position: {{ job.position }}</p>
             <p>Updated on {{ job.date_updated }}</p>
             <p>{{ job.stage }}</p>
+            {% if job.prioritized == 'T' %}
+            <p>Favorited!</p>
+            {% endif %}
         </div>
     </div>
   </a>

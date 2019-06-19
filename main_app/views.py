@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Job, Outcome
-from .forms import OutcomeForm, StageForm
+from .forms import OutcomeForm, StageForm, PrioritizeForm
 # Create your views here.
 
 def home(request):
@@ -18,7 +18,7 @@ def jobs_index(request):
 
 class JobCreate(CreateView):
     model = Job
-    fields = ['company', 'position', 'company_address', 'prioritized', 'date_job_posted', 'types', 'job_url', 'date_applied', 'date_deadline', 'stage']
+    fields = ['company', 'position', 'company_address', 'date_job_posted', 'types', 'job_url', 'date_applied', 'date_deadline', 'stage']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -40,11 +40,23 @@ def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)
     outcome_form = OutcomeForm()
     stage_form = StageForm()
-    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form})
+    prioritize_form = PrioritizeForm()
+    return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form, 'prioritize_form': prioritize_form})
 
+def job_prioritize(request, job_id):
+    job = Job.objects.get(id=job_id)
+    print(job.prioritized)
+    if job.prioritized == 'F':
+        job.prioritized = 'T'
+        print(job.prioritized)
+    else: 
+        job.prioritized = 'F'
+    job.save()
+    return redirect('jobs_detail', job_id=job_id)
+
+    
 def stage_update(request, job_id):
     job = Job.objects.get(id=job_id)
-    print(request.POST['stage'])
     job.stage = request.POST['stage']
     job.save()
     return redirect('jobs_detail', job_id=job_id)

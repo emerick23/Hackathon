@@ -10,3 +10,8 @@ class StageForm(ModelForm):
     class Meta:
         model = Job
         fields = ['stage']
+
+class PrioritizeForm(ModelForm):
+    class Meta:
+        model = Job
+        fields = ['prioritized']
