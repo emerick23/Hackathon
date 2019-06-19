@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-  <div class="col s3" style="background-color: #c6c6c6">
+<div class="addjob">
+  <a href="{% url 'jobs_create' %}"><button class="jobbutton"><i class="material-icons"
+    style="font-size: 30px; color: black">add_circle_outline</i>ADD JOB</button></a>
+</div>
+<div class="row index">
+  <div class="col s3">
     <h5>APPLY</h5>
 {% for job in jobs %}
   <a href="{% url 'jobs_detail' job.id %}">
@@ -20,7 +24,7 @@
   </a>
 {% endfor %}
 </div>
-<div class="col s3" style="background-color: #c6c6c6">
+<div class="col s3">
   <h5>INTERVIEW</h5>
   {% for job in jobs %}
   <a href="{% url 'jobs_detail' job.id %}">
@@ -39,7 +43,7 @@
 </div>
 
 
-<div class="col s3" style="background-color: #c6c6c6">
+<div class="col s3">
   <h5>FOLLOW UP</h5>
   {% for job in jobs %}
   <a href="{% url 'jobs_detail' job.id %}">
@@ -58,7 +62,7 @@
 </div>
 
 
-<div class="col s3" style="background-color: #c6c6c6">
+<div class="col s3">
   <h5>OUTCOMES</h5>
   {% for job in jobs %}
   <a href="{% url 'jobs_detail' job.id %}">
