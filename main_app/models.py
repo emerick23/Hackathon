@@ -4,6 +4,10 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 
 # Create your models here.
+BOOLS = (
+    ('T', 'True'),
+    ('F', 'False')
+)
 
 TYPES = (
     ('I', 'Internship'),
@@ -23,7 +27,11 @@ class Job(models.Model):
     company = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     company_address = models.CharField(max_length=100)
-    prioritized = models.BooleanField(default=False)
+    prioritized = models.CharField(
+        max_length=1,
+        choices=BOOLS,
+        default=BOOLS[0][0]
+    )
     date_job_posted = models.DateField(default=date.today)
     types = models.CharField(
         max_length=1,
@@ -43,6 +51,9 @@ class Job(models.Model):
 
     def get_absolute_url(self):
         return reverse('jobs_detail', kwargs={'job_id': self.id})
+
+    def prioritize(self):
+        print('hello')
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
