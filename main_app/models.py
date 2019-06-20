@@ -30,7 +30,7 @@ class Job(models.Model):
     prioritized = models.CharField(
         max_length=1,
         choices=BOOLS,
-        default=BOOLS[0][0]
+        default=BOOLS[1][1]
     )
     date_job_posted = models.DateField(default=date.today)
     types = models.CharField(

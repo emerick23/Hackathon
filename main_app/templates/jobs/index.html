@@ -8,77 +8,96 @@
 <div class="row index">
   <div class="col s3">
     <h5>APPLY</h5>
-{% for job in jobs %}
-  <a href="{% url 'jobs_detail' job.id %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">Company: {{ job.company }}</span>
-            <p>Position: {{ job.position }}</p>
-            <p>Updated on {{ job.date_updated }}</p>
+    {% for job in jobs %}
+    {% if job.stage == 'A' %}
+    <a href="{% url 'jobs_detail' job.id %}">
+      <div class="card">
+          <div class="card-content">
             {% if job.prioritized == 'T' %}
-            <p>Favorited!</p>
-            {% endif %}
-        </div>
-    </div>
-  </a>
-{% endfor %}
+              <span class="card-title">{{ job.company }}<i class="material-icons">star</i></span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% else %}
+              <span class="card-title">{{ job.company }}</span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% endif %}
+          </div>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
 </div>
 <div class="col s3">
   <h5>INTERVIEW</h5>
   {% for job in jobs %}
+  {% if job.stage == 'I' %}
   <a href="{% url 'jobs_detail' job.id %}">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">Company: {{ job.company }}</span>
-            <p>Position: {{ job.position }}</p>
-            <p>Updated on {{ job.date_updated }}</p>
-            {% if job.prioritized == true %}
-            <p>TRUE</p>
-            {% endif %}
+            {% if job.prioritized == 'T' %}
+              <span class="card-title">{{ job.company }}<i class="material-icons">star</i></span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% else %}
+              <span class="card-title">{{ job.company }}</span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% endif %}
         </div>
     </div>
   </a>
-{% endfor %}
+  {% endif %}
+  {% endfor %}
 </div>
 
 
 <div class="col s3">
   <h5>FOLLOW UP</h5>
   {% for job in jobs %}
+  {% if job.stage == 'F' %}
   <a href="{% url 'jobs_detail' job.id %}">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">Company: {{ job.company }}</span>
-            <p>Position: {{ job.position }}</p>
-            <p>Updated on {{ job.date_updated }}</p>
-            {% if job.prioritized == true %}
-            <p>TRUE</p>
-            {% endif %}
+            {% if job.prioritized == 'T' %}
+              <span class="card-title">{{ job.company }}<i class="material-icons">star</i></span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% else %}
+              <span class="card-title">{{ job.company }}</span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% endif %}
         </div>
     </div>
   </a>
-{% endfor %}
+  {% endif %}
+  {% endfor %}
 </div>
 
 
 <div class="col s3">
   <h5>OUTCOMES</h5>
   {% for job in jobs %}
+  {% if job.stage == 'O' %}
   <a href="{% url 'jobs_detail' job.id %}">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">Company: {{ job.company }}</span>
-            <p>Position: {{ job.position }}</p>
-            <p>Updated on {{ job.date_updated }}</p>
-            {% if job.prioritized == true %}
-            <p>TRUE</p>
-            {% endif %}
+            {% if job.prioritized == 'T' %}
+              <span class="card-title">{{ job.company }}<i class="material-icons">star</i></span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% else %}
+              <span class="card-title">{{ job.company }}</span>
+              <p>Position: {{ job.position }}</p>
+              <p>Updated on {{ job.date_updated }}</p>
+              {% endif %}
         </div>
     </div>
   </a>
-{% endfor %}
 </div>
-
+{% endif %}
+{% endfor %}
 </div>
 
 {% endblock %}
