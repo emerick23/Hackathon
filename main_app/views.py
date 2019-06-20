@@ -34,6 +34,7 @@ class JobUpdate(UpdateView):
         
 class JobDelete(DeleteView):
     model = Job
+    success_url = '/jobs'
 
 class ContactCreate(CreateView):
     model = Contact
