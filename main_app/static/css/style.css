@@ -5,12 +5,20 @@
 body {
     margin: 0;
     height: 100vh;
-    display: flex;
+    /* display: flex;   */
     flex-direction: column;
     justify-content: space-between;
     /* align-items: center; */
 }
-
+#page-footer {
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    /* background-color: #efefef; */
+    text-align: center;
+    /* clear: both; */
+    margin: 0;
+}
 main {
     width: 100%;
     height: 100%;
@@ -20,6 +28,14 @@ main {
     /* align-items: center; */
     overflow-y: scroll;
     /* background-color: #C6C6C6; */
+}
+
+.loginpage {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .row {
@@ -39,40 +55,38 @@ main {
     color: black;
 }
 
-.login {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.login>h1 {
+.loginpage>h1 {
     margin: -.7%;
 }
 
 .signOnLog {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin: -2%;
+    justify-content: space-around;
 }
 
-.login>form {
+.login {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
+    width: 40%;
 }
 
 #id_username, #id_password {
     height: 40px;
-    width: 250%;
+    width: 75%;
     border: 2px solid #C6C6C6;
     
 }
 
-.login>input, label {
+.loginpage>input, label {
     display: block;
+}
+
+.loginbtn {
+    display: flex;
+    justify-content: center;
 }
 
 .s3 {

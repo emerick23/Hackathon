@@ -35,19 +35,17 @@
             </div>
         </nav>
 
-        <script>  document.addEventListener('DOMContentLoaded', function () {
-                var elems = document.querySelectorAll('.modal');
-                var instances = M.Modal.init(elems);
-            });</script>
 
     </header>
     <main>
         {% block content %}
         {% endblock %}
     </main>
-    <footer class="page-footer" style="background-color: #C6C6C6; color: black">
+
+    <footer id="page-footer" style="background-color: #C6C6C6; color: black">
         <div class="right">All Rights Reserved, &copy; 2019 joblist &nbsp;</div>
     </footer>
+        
 </body>
 
 </html>
