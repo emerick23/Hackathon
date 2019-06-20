@@ -1,58 +1,92 @@
 {% extends 'base.html' %}
 {% block content %}
-
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">Company: {{ job.company }}</span>
-                <p>Address: {{ job.company_address }}</p>
-                <p>Position: {{ job.position }}</p>
-                <p>Type: {{ job.get_types_display }}</p>
-                <p>{{ job.stage }}</p>
-                <h6>Contacts: </h6>
-                {% for contact in job.contact_set.all %}
-                <p>{{ contact.name }}</p>
-                <p>{{ contact.company }}</p>
-                <p>{{ contact.title }}</p>
-                <p>{{ contact.email }}</p>
-                {% endfor %}
-                <form method="post" action="{% url 'add_outcome' job.id %}">
-                    {% csrf_token %}
-                    {{ outcome_form.as_p }}
-                    <input type="submit" class="btn" value="Add Note">
-                </form>
-                {% for outcome in job.outcome_set.all %}
-                <li>{{ outcome.note }}</li>
-                <form action="{% url 'remove_outcome' job.id outcome.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn">X</button>
-                </form>
-                {% endfor %}
+<div class="container white">
+    <div class="section">
+        <div class="row">
+            <div class="col s6">
+                <h3>{{ job.company }}</h3>
+                <h5>{{ job.position }}</h5>
             </div>
-            <div class="input-field">
-                <form action="{% url 'stage_update' job.id %}" method="post">
+            <div class="col s6">
+                <form class="right" action="{% url 'stage_update' job.id %}" method="post">
                     {% csrf_token %}
                     {{ stage_form.as_p }}
                     <input type="submit" class="btn" value="Update Stage">
                 </form>
             </div>
-            <div>
-                <form action="{% url 'job_prioritize' job.id %}" method="post">
-                    {%csrf_token %}
-                    {% for field in prioritize_form %}
-                    <input type="submit" class="btn" value="Prioritize">
-                    {% endfor %}
-                </form>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <div class="row">
+            <div class="col s6">
+                <h6 style="font-weight: bold">Description</h6>
+                <p>Address: {{ job.company_address }}</p>
+                <p>Date Posted: {{ job.date_job_posted }}</p>
+                <p>Type: {{ job.get_types_display }}</p>
+                <p>Job URL: {{ job.job_url }}</p>
             </div>
-            {% if job.contact_set.first %}
-            <a href="{% url 'contact_delete' job.id contact.id %}" class="btn">Delete Contact</a>
-            {% else %}
-            <a href="{% url 'contact_create' job.id %}" class="btn">Add Contact</a>
-            {% endif %}
-            <div class="card-action">
-                <a href="{% url 'jobs_update' job.id %}">Edit</a>
-                <a href="{% url 'jobs_delete' job.id %}">Delete</a>
+            <div class="col s6">
+                <h6 style="font-weight: bold">Important Dates</h6>
+                <p>Deadline: {{ job.date_deadline }}</p>
+                <p>Date Applied: {{ job.date_applied }}</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col s6">
+                <h6 style="font-weight: bold">Contact</h6>
+                {% for contact in job.contact_set.all %}
+                <p>Name: {{ contact.name }}</p>
+                <p>Company: {{ contact.company }}</p>
+                <p>Title: {{ contact.title }}</p>
+                <p>Email: {{ contact.email }}</p>
+                {% endfor %}
+            </div>
+            <div class="col s6">
+                <h6 style="font-weight: bold">Actions</h6>
+                <form style="padding: 5px 0" action="{% url 'job_prioritize' job.id %}" method="post" class="center">
+                    {%csrf_token %}
+                    {% for field in prioritize_form %}
+                    <input style="width: 160px" type="submit" class="btn" value="Prioritize Job">
+                    {% endfor %}
+                </form>
+                <div style="padding: 5px 0;" class="center">
+                    {% if job.contact_set.first %}
+                    <a href="{% url 'contact_delete' job.id contact.id %}" class="btn" style="width: 160px;">Delete
+                        Contact</a>
+                    {% else %}
+                    <a href="{% url 'contact_create' job.id %}" class="btn" style="width: 160px">Add Contact</a>
+                    {% endif %}
+                </div>
+                <div style="padding: 5px 0" class="center">
+                    <a href="{% url 'jobs_update' job.id %}" class="btn" style="width: 160px">Edit Job</a>
+                </div>
+                <div style="padding: 5px 0" class="center">
+                    <a href="{% url 'jobs_delete' job.id %}" class="btn" style="width: 160px">Delete Job</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <form method="post" action="{% url 'add_outcome' job.id %}" style="padding: 20px 0">
+            {% csrf_token %}
+            {{ outcome_form.as_p }}
+            <input type="submit" class="btn" value="Add Note">
+        </form>
+        {% for outcome in job.outcome_set.all %}
+        <div class="card" style="padding: 5px 0">
+            <div class="card-content">
+                <p>{{ outcome.note }}</p>
+                <div class="right">
+                    <form action="{% url 'remove_outcome' job.id outcome.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">X</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 <script>
