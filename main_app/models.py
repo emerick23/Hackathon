@@ -41,7 +41,7 @@ class Job(models.Model):
     job_url = models.CharField(max_length=100)
     date_applied = models.DateField(default=date.today)
     date_deadline = models.DateField(default=date.today)
-    date_updated = models.DateTimeField(auto_now=True)
+    date_updated = models.DateField(auto_now=True)
     stage = models.CharField(
         max_length=1,
         choices=STAGES,
