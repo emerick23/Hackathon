@@ -11,12 +11,13 @@ from .forms import OutcomeForm, StageForm, PrioritizeForm
 
 def home(request):
     return render(request, 'home.html')
-
+    LoginRequiredMixin, 
+@login_required
 def jobs_index(request):
     jobs = Job.objects.filter(user=request.user)
     return render(request, 'jobs/index.html', {'jobs': jobs})
 
-class JobCreate(CreateView):
+class JobCreate(LoginRequiredMixin, CreateView):
     model = Job
     fields = ['company', 'position', 'company_address', 'date_job_posted', 'types', 'job_url', 'date_applied', 'date_deadline', 'stage']
 
@@ -24,7 +25,7 @@ class JobCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class JobUpdate(UpdateView):
+class JobUpdate(LoginRequiredMixin, UpdateView):
     model = Job
     fields = ['company', 'position', 'company_address', 'date_job_posted', 'types', 'job_url', 'date_applied', 'date_deadline', 'stage']
 
@@ -32,11 +33,11 @@ class JobUpdate(UpdateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
         
-class JobDelete(DeleteView):
+class JobDelete(LoginRequiredMixin, DeleteView):
     model = Job
     success_url = '/jobs'
 
-class ContactCreate(CreateView):
+class ContactCreate(LoginRequiredMixin, CreateView):
     model = Contact
     fields = ['name', 'company', 'title', 'email']
 
@@ -47,10 +48,11 @@ class ContactCreate(CreateView):
         form.save()
         return redirect('jobs_detail', job_id=self.kwargs['job_id'])
 
-class ContactDelete(DeleteView):
+class ContactDelete(LoginRequiredMixin, DeleteView):
     model = Contact
     success_url = '/jobs'
 
+@login_required
 def jobs_detail(request, job_id):
     job = Job.objects.get(id=job_id)
     contact = job.contact_set.first()
@@ -59,6 +61,7 @@ def jobs_detail(request, job_id):
     prioritize_form = PrioritizeForm()
     return render(request, 'jobs/detail.html', {'job': job, 'outcome_form': outcome_form, 'stage_form': stage_form, 'prioritize_form': prioritize_form, 'contact': contact})
 
+@login_required
 def job_prioritize(request, job_id):
     job = Job.objects.get(id=job_id)
     print(job.prioritized)
@@ -70,13 +73,14 @@ def job_prioritize(request, job_id):
     job.save()
     return redirect('jobs_detail', job_id=job_id)
 
-    
+@login_required    
 def stage_update(request, job_id):
     job = Job.objects.get(id=job_id)
     job.stage = request.POST['stage']
     job.save()
     return redirect('jobs_detail', job_id=job_id)
 
+@login_required
 def add_outcome(request, job_id):
     form = OutcomeForm(request.POST)
     if form.is_valid():
@@ -85,6 +89,7 @@ def add_outcome(request, job_id):
         new_outcome.save()
     return redirect('jobs_detail', job_id=job_id)
 
+@login_required
 def remove_outcome(request, job_id, outcome_id):
     outcome = Outcome.objects.get(id=outcome_id)
     outcome.delete()
