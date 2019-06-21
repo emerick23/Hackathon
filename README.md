@@ -31,7 +31,7 @@ https://trello.com/b/HsiUm86k/jobtracker
 ![](main_app/static/images/userflow3.jpg)
 
 ## Heroku
-https://hidden-sands-65631.herokuapp.com/
+https://joblistapp.herokuapp.com/
 
 ## Future Goals
 #### -Add Board Feature
