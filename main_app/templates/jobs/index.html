@@ -5,6 +5,8 @@
   <a href="{% url 'jobs_create' %}"><button class="jobbutton"><i class="material-icons"
         style="font-size: 30px; color: black">add_circle_outline</i>ADD JOB</button></a>
 </div>
+
+
 <div class="row index">
   <div class="col s3">
     <h5 style="font-weight: bold">APPLY</h5>
@@ -26,6 +28,8 @@
     {% endif %}
     {% endfor %}
   </div>
+
+
   <div class="col s3">
     <h5 style="font-weight: bold">INTERVIEW</h5>
     {% for job in jobs %}

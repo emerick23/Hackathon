@@ -71,7 +71,7 @@
                 <p>Email: {{ contact.email }}</p>
                 {% endfor %}
             </div>
-            <div class="col s6">
+            <div class="col s6" style="background-color: #F1F1F1; padding-bottom: 25px;">
                 <h6 style="font-weight: bold">Actions</h6>
                 <form style="padding: 5px 0" action="{% url 'job_prioritize' job.id %}" method="post" class="center">
                     {%csrf_token %}

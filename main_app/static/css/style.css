@@ -119,8 +119,12 @@ nav ul a {
     margin: 1px 2px;    
 }
 
+.btn:hover {
+    background-color: #87AAB9
+}
+
 .jobbutton:hover {
-    background-color: #C6C6C6;
+    background-color: #87AAB9;
     cursor: pointer;
 }
 
