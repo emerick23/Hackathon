@@ -11,7 +11,7 @@
                 {% endif %}
                 <h5>{{ job.position }}</h5>
             </div>
-            <div class="col s6">
+            <div class="col s6 center">
                 <form action="{% url 'stage_update' job.id %}" method="post">
                     {% csrf_token %}
                     <select name="stage" id="id_stage">

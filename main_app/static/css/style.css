@@ -148,3 +148,8 @@ i.icon-blue {
     font-size: 18px;
     height: 38px;
 }
+
+.select-wrapper input.select-dropdown {
+    margin: 1.9466666667rem 0 1.168rem 0;
+    text-align: center;
+}
