@@ -4,7 +4,11 @@
     <div class="section">
         <div class="row">
             <div class="col s6">
+                {% if job.prioritized == 'T' %}
+                <h3>{{ job.company }}<i class="material-icons icon-blue">star</i></h3>
+                {% else %}
                 <h3>{{ job.company }}</h3>
+                {% endif %}
                 <h5>{{ job.position }}</h5>
             </div>
             <div class="col s6">
@@ -89,7 +93,6 @@
         {% endfor %}
     </div>
 </div>
-<h1>{{ job.prioritized }}</h1>
 <script>
     var select2El = document.getElementById('id_stage');
     M.FormSelect.init(select2El);

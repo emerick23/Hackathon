@@ -134,3 +134,11 @@ div.addjob {
     flex-direction: row;
     justify-content: flex-end;
 }
+
+a {
+    color: black;
+}
+
+i.icon-blue {
+    color: rgb(0, 183, 255);
+}
