@@ -4,6 +4,10 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 
 # Create your models here.
+BOOLS = (
+    ('T', 'True'),
+    ('F', 'False')
+)
 
 TYPES = (
     ('I', 'Internship'),
@@ -23,7 +27,11 @@ class Job(models.Model):
     company = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     company_address = models.CharField(max_length=100)
-    prioritized = models.BooleanField(default=False)
+    prioritized = models.CharField(
+        max_length=1,
+        choices=BOOLS,
+        default=BOOLS[1][1]
+    )
     date_job_posted = models.DateField(default=date.today)
     types = models.CharField(
         max_length=1,
@@ -33,9 +41,9 @@ class Job(models.Model):
     job_url = models.CharField(max_length=100)
     date_applied = models.DateField(default=date.today)
     date_deadline = models.DateField(default=date.today)
-    date_updated = models.DateTimeField(auto_now=True)
+    date_updated = models.DateField(auto_now=True)
     stage = models.CharField(
-        max_length=1,
+        max_length=10,
         choices=STAGES,
         default=STAGES[0][0]
     )
@@ -51,7 +59,9 @@ class Contact(models.Model):
     email = models.EmailField(max_length=254)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
+    def get_absolute_url(self):
+        return reverse('jobs_detail', kwargs={'job_id': self.id})
+
 class Outcome(models.Model):
     note = models.TextField(max_length=250)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
-
