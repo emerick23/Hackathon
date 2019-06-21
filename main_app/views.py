@@ -26,7 +26,7 @@ class JobCreate(CreateView):
 
 class JobUpdate(UpdateView):
     model = Job
-    fields = ['company', 'position', 'company_address', 'prioritized', 'date_job_posted', 'types', 'job_url', 'date_applied', 'date_deadline', 'stage']
+    fields = ['company', 'position', 'company_address', 'date_job_posted', 'types', 'job_url', 'date_applied', 'date_deadline', 'stage']
 
     def form_valid(self, form):
         form.instance.user = self.request.user

@@ -142,3 +142,9 @@ a {
 i.icon-blue {
     color: rgb(0, 183, 255);
 }
+
+.card .card-title {
+    font-weight: bold;
+    font-size: 18px;
+    height: 38px;
+}

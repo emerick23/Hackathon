@@ -12,9 +12,34 @@
                 <h5>{{ job.position }}</h5>
             </div>
             <div class="col s6">
-                <form class="right" action="{% url 'stage_update' job.id %}" method="post">
+                <form action="{% url 'stage_update' job.id %}" method="post">
                     {% csrf_token %}
-                    {{ stage_form.as_p }}
+                    <select name="stage" id="id_stage">
+                        {% if job.stage == 'A' %}
+                        <option value="A">Apply</option>
+                        <option value="I">Interview</option>
+                        <option value="F">Follow Up</option>
+                        <option value="O">Outcomes</option>
+                        {% endif %}
+                        {% if job.stage == 'I' %}
+                        <option value="A">Apply</option>
+                        <option value="I" selected>Interview</option>
+                        <option value="F">Follow Up</option>
+                        <option value="O">Outcomes</option>
+                        {% endif %}
+                        {% if job.stage == 'F' %}
+                        <option value="A">Apply</option>
+                        <option value="I">Interview</option>
+                        <option value="F" selected>Follow Up</option>
+                        <option value="O">Outcomes</option>
+                        {% endif %}
+                        {% if job.stage == 'O' %}
+                        <option value="A">Apply</option>
+                        <option value="I">Interview</option>
+                        <option value="F">Follow Up</option>
+                        <option value="O" selected>Outcomes</option>
+                        {% endif %}
+                    </select>
                     <input type="submit" class="btn" value="Update Stage">
                 </form>
             </div>
